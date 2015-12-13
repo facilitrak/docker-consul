@@ -3,5 +3,5 @@
 if [ -n "${CONSUL_JOIN}" ]; then
   exec /bin/consul agent -config-dir /etc/consul -retry-join $CONSUL_JOIN
 else
-  exec /bin/consul agent -config-dir /etc/consul
+  exec /bin/consul agent -config-dir /etc/consul -bootstrap-expect 3
 fi
