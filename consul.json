@@ -1,0 +1,13 @@
+{
+  "data_dir": "/var/lib/consul/data",
+  "ui_dir": "/ui",
+  "log_level": "INFO",
+  "server": true,
+  "ports": {
+    "dns": 53
+  },
+  "dns_config": {
+		"allow_stale": false
+	},
+  "recursors": ["8.8.8.8", "8.8.4.4"]
+}
