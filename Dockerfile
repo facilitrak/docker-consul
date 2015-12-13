@@ -2,6 +2,7 @@ FROM alpine:edge
 
 ENV CONSUL_VERSION 0.6.0
 ADD https://releases.hashicorp.com/consul/$CONSUL_VERSION/consul_${CONSUL_VERSION}_linux_amd64.zip /tmp/consul.zip
+ADD https://releases.hashicorp.com/consul/0.6.0/consul_${CONSUL_VERSION}_web_ui.zip /tmp/ui.zip
 RUN apk --update add bash ca-certificates curl \
     && curl -Ls https://circle-artifacts.com/gh/andyshinn/alpine-pkg-glibc/6/artifacts/0/home/ubuntu/alpine-pkg-glibc/packages/x86_64/glibc-2.21-r2.apk > /tmp/glibc-2.21-r2.apk \
     && apk add --allow-untrusted /tmp/glibc-2.21-r2.apk \
@@ -10,6 +11,10 @@ RUN apk --update add bash ca-certificates curl \
     && unzip /tmp/consul.zip \
     && chmod +x /bin/consul \
     && rm /tmp/consul.zip \
+    && mkdir -p /ui \
+    && cd /ui \
+    && unzip /tmp/ui.zip \
+    && rm /tmp/ui.zip \
     && mkdir -p /var/lib/consul/data \
     && mkdir -p /etc/consul/ \
     && apk del curl \
